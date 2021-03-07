@@ -1,0 +1,670 @@
+{
+  "data": [
+    {
+      "Owner": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "Description": null,
+      "$currency_symbol": "$",
+      "Campaign_Source": null,
+      "$review_process": {
+        "approve": false,
+        "reject": false,
+        "resubmit": false
+      },
+      "$followers": null,
+      "Closing_Date": "2021-03-09",
+      "Last_Activity_Time": null,
+      "Modified_By": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "$review": null,
+      "Lead_Conversion_Time": null,
+      "$state": "save",
+      "$process_flow": false,
+      "Deal_Name": "King",
+      "Expected_Revenue": null,
+      "Overall_Sales_Duration": 3,
+      "Stage": "Identify Decision Makers",
+      "Account_Name": {
+        "name": "King (Sample)",
+        "id": "4816515000000307138"
+      },
+      "id": "4816515000000307320",
+      "$approved": true,
+      "$approval": {
+        "delegate": false,
+        "approve": false,
+        "reject": false,
+        "resubmit": false
+      },
+      "Modified_Time": "2021-03-06T09:01:25-08:00",
+      "Created_Time": "2021-03-06T09:01:25-08:00",
+      "Amount": 60000,
+      "$followed": false,
+      "Probability": 60,
+      "Next_Step": null,
+      "$editable": true,
+      "$orchestration": false,
+      "Contact_Name": {
+        "name": "Kris Marrier (Sample)",
+        "id": "4816515000000307234"
+      },
+      "Sales_Cycle_Duration": 3,
+      "Type": "New Business",
+      "$in_merge": false,
+      "Lead_Source": null,
+      "Created_By": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "Tag": [],
+      "$approval_state": "approved"
+    },
+    {
+      "Owner": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "Description": null,
+      "$currency_symbol": "$",
+      "Campaign_Source": null,
+      "$review_process": {
+        "approve": false,
+        "reject": false,
+        "resubmit": false
+      },
+      "$followers": null,
+      "Closing_Date": "2021-03-07",
+      "Last_Activity_Time": "2021-03-06T09:01:26-08:00",
+      "Modified_By": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "$review": null,
+      "Lead_Conversion_Time": null,
+      "$state": "save",
+      "$process_flow": false,
+      "Deal_Name": "Truhlar And Truhlar Attys",
+      "Expected_Revenue": null,
+      "Overall_Sales_Duration": 1,
+      "Stage": "Needs Analysis",
+      "Account_Name": {
+        "name": "Truhlar And Truhlar (Sample)",
+        "id": "4816515000000307137"
+      },
+      "id": "4816515000000307319",
+      "$approved": true,
+      "$approval": {
+        "delegate": false,
+        "approve": false,
+        "reject": false,
+        "resubmit": false
+      },
+      "Modified_Time": "2021-03-06T09:01:25-08:00",
+      "Created_Time": "2021-03-06T09:01:25-08:00",
+      "Amount": 45000,
+      "$followed": false,
+      "Probability": 20,
+      "Next_Step": null,
+      "$editable": true,
+      "$orchestration": false,
+      "Contact_Name": {
+        "name": "Sage Wieser (Sample)",
+        "id": "4816515000000307233"
+      },
+      "Sales_Cycle_Duration": 1,
+      "Type": "New Business",
+      "$in_merge": false,
+      "Lead_Source": null,
+      "Created_By": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "Tag": [],
+      "$approval_state": "approved"
+    },
+    {
+      "Owner": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "Description": null,
+      "$currency_symbol": "$",
+      "Campaign_Source": null,
+      "$review_process": {
+        "approve": false,
+        "reject": false,
+        "resubmit": false
+      },
+      "$followers": null,
+      "Closing_Date": "2021-03-08",
+      "Last_Activity_Time": "2021-03-06T09:01:26-08:00",
+      "Modified_By": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "$review": null,
+      "Lead_Conversion_Time": null,
+      "$state": "save",
+      "$process_flow": false,
+      "Deal_Name": "Commercial Press",
+      "Expected_Revenue": null,
+      "Overall_Sales_Duration": 2,
+      "Stage": "Closed Lost",
+      "Account_Name": {
+        "name": "Commercial Press (Sample)",
+        "id": "4816515000000307136"
+      },
+      "id": "4816515000000307318",
+      "$approved": true,
+      "$approval": {
+        "delegate": false,
+        "approve": false,
+        "reject": false,
+        "resubmit": false
+      },
+      "Modified_Time": "2021-03-06T09:01:25-08:00",
+      "Created_Time": "2021-03-06T09:01:25-08:00",
+      "Amount": 45000,
+      "$followed": false,
+      "Probability": 0,
+      "Next_Step": null,
+      "$editable": true,
+      "$orchestration": false,
+      "Contact_Name": {
+        "name": "Leota Dilliard (Sample)",
+        "id": "4816515000000307232"
+      },
+      "Sales_Cycle_Duration": 2,
+      "Type": "Existing Business",
+      "$in_merge": false,
+      "Lead_Source": null,
+      "Created_By": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "Tag": [],
+      "$approval_state": "approved"
+    },
+    {
+      "Owner": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "Description": null,
+      "$currency_symbol": "$",
+      "Campaign_Source": null,
+      "$review_process": {
+        "approve": false,
+        "reject": false,
+        "resubmit": false
+      },
+      "$followers": null,
+      "Closing_Date": "2021-03-09",
+      "Last_Activity_Time": "2021-03-06T09:01:27-08:00",
+      "Modified_By": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "$review": null,
+      "Lead_Conversion_Time": null,
+      "$state": "save",
+      "$process_flow": false,
+      "Deal_Name": "Morlong Associates",
+      "Expected_Revenue": null,
+      "Overall_Sales_Duration": 3,
+      "Stage": "Closed Won",
+      "Account_Name": {
+        "name": "Morlong Associates (Sample)",
+        "id": "4816515000000307135"
+      },
+      "id": "4816515000000307317",
+      "$approved": true,
+      "$approval": {
+        "delegate": false,
+        "approve": false,
+        "reject": false,
+        "resubmit": false
+      },
+      "Modified_Time": "2021-03-06T09:01:25-08:00",
+      "Created_Time": "2021-03-06T09:01:25-08:00",
+      "Amount": 35000,
+      "$followed": false,
+      "Probability": 100,
+      "Next_Step": null,
+      "$editable": true,
+      "$orchestration": false,
+      "Contact_Name": {
+        "name": "Mitsue Tollner (Sample)",
+        "id": "4816515000000307231"
+      },
+      "Sales_Cycle_Duration": 3,
+      "Type": "Existing Business",
+      "$in_merge": false,
+      "Lead_Source": null,
+      "Created_By": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "Tag": [],
+      "$approval_state": "approved"
+    },
+    {
+      "Owner": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "Description": null,
+      "$currency_symbol": "$",
+      "Campaign_Source": null,
+      "$review_process": {
+        "approve": false,
+        "reject": false,
+        "resubmit": false
+      },
+      "$followers": null,
+      "Closing_Date": "2021-03-07",
+      "Last_Activity_Time": "2021-03-06T09:01:26-08:00",
+      "Modified_By": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "$review": null,
+      "Lead_Conversion_Time": null,
+      "$state": "save",
+      "$process_flow": false,
+      "Deal_Name": "Chapman",
+      "Expected_Revenue": null,
+      "Overall_Sales_Duration": 1,
+      "Stage": "Negotiation/Review",
+      "Account_Name": {
+        "name": "Chapman (Sample)",
+        "id": "4816515000000307134"
+      },
+      "id": "4816515000000307316",
+      "$approved": true,
+      "$approval": {
+        "delegate": false,
+        "approve": false,
+        "reject": false,
+        "resubmit": false
+      },
+      "Modified_Time": "2021-03-06T09:01:25-08:00",
+      "Created_Time": "2021-03-06T09:01:25-08:00",
+      "Amount": 70000,
+      "$followed": false,
+      "Probability": 90,
+      "Next_Step": null,
+      "$editable": true,
+      "$orchestration": false,
+      "Contact_Name": {
+        "name": "Simon Morasca (Sample)",
+        "id": "4816515000000307230"
+      },
+      "Sales_Cycle_Duration": 1,
+      "Type": "Existing Business",
+      "$in_merge": false,
+      "Lead_Source": null,
+      "Created_By": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "Tag": [],
+      "$approval_state": "approved"
+    },
+    {
+      "Owner": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "Description": null,
+      "$currency_symbol": "$",
+      "Campaign_Source": null,
+      "$review_process": {
+        "approve": false,
+        "reject": false,
+        "resubmit": false
+      },
+      "$followers": null,
+      "Closing_Date": "2021-03-12",
+      "Last_Activity_Time": "2021-03-06T09:01:27-08:00",
+      "Modified_By": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "$review": null,
+      "Lead_Conversion_Time": null,
+      "$state": "save",
+      "$process_flow": false,
+      "Deal_Name": "Printing Dimensions",
+      "Expected_Revenue": null,
+      "Overall_Sales_Duration": 6,
+      "Stage": "Proposal/Price Quote",
+      "Account_Name": {
+        "name": "Printing Dimensions (Sample)",
+        "id": "4816515000000307133"
+      },
+      "id": "4816515000000307315",
+      "$approved": true,
+      "$approval": {
+        "delegate": false,
+        "approve": false,
+        "reject": false,
+        "resubmit": false
+      },
+      "Modified_Time": "2021-03-06T09:01:25-08:00",
+      "Created_Time": "2021-03-06T09:01:25-08:00",
+      "Amount": 25000,
+      "$followed": false,
+      "Probability": 75,
+      "Next_Step": null,
+      "$editable": true,
+      "$orchestration": false,
+      "Contact_Name": {
+        "name": "Donette Foller (Sample)",
+        "id": "4816515000000307229"
+      },
+      "Sales_Cycle_Duration": 6,
+      "Type": "Existing Business",
+      "$in_merge": false,
+      "Lead_Source": null,
+      "Created_By": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "Tag": [],
+      "$approval_state": "approved"
+    },
+    {
+      "Owner": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "Description": null,
+      "$currency_symbol": "$",
+      "Campaign_Source": null,
+      "$review_process": {
+        "approve": false,
+        "reject": false,
+        "resubmit": false
+      },
+      "$followers": null,
+      "Closing_Date": "2021-03-10",
+      "Last_Activity_Time": "2021-03-06T09:01:27-08:00",
+      "Modified_By": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "$review": null,
+      "Lead_Conversion_Time": null,
+      "$state": "save",
+      "$process_flow": false,
+      "Deal_Name": "Feltz Printing Service",
+      "Expected_Revenue": null,
+      "Overall_Sales_Duration": 4,
+      "Stage": "Identify Decision Makers",
+      "Account_Name": {
+        "name": "Feltz Printing Service (Sample)",
+        "id": "4816515000000307132"
+      },
+      "id": "4816515000000307314",
+      "$approved": true,
+      "$approval": {
+        "delegate": false,
+        "approve": false,
+        "reject": false,
+        "resubmit": false
+      },
+      "Modified_Time": "2021-03-06T09:01:25-08:00",
+      "Created_Time": "2021-03-06T09:01:25-08:00",
+      "Amount": 45000,
+      "$followed": false,
+      "Probability": 60,
+      "Next_Step": null,
+      "$editable": true,
+      "$orchestration": false,
+      "Contact_Name": {
+        "name": "Capla Paprocki (Sample)",
+        "id": "4816515000000307228"
+      },
+      "Sales_Cycle_Duration": 4,
+      "Type": "New Business",
+      "$in_merge": false,
+      "Lead_Source": null,
+      "Created_By": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "Tag": [],
+      "$approval_state": "approved"
+    },
+    {
+      "Owner": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "Description": null,
+      "$currency_symbol": "$",
+      "Campaign_Source": null,
+      "$review_process": {
+        "approve": false,
+        "reject": false,
+        "resubmit": false
+      },
+      "$followers": null,
+      "Closing_Date": "2021-03-07",
+      "Last_Activity_Time": "2021-03-06T09:01:27-08:00",
+      "Modified_By": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "$review": null,
+      "Lead_Conversion_Time": null,
+      "$state": "save",
+      "$process_flow": false,
+      "Deal_Name": "Chemel",
+      "Expected_Revenue": null,
+      "Overall_Sales_Duration": 1,
+      "Stage": "Value Proposition",
+      "Account_Name": {
+        "name": "Chemel (Sample)",
+        "id": "4816515000000307131"
+      },
+      "id": "4816515000000307313",
+      "$approved": true,
+      "$approval": {
+        "delegate": false,
+        "approve": false,
+        "reject": false,
+        "resubmit": false
+      },
+      "Modified_Time": "2021-03-06T09:01:25-08:00",
+      "Created_Time": "2021-03-06T09:01:25-08:00",
+      "Amount": 70000,
+      "$followed": false,
+      "Probability": 40,
+      "Next_Step": null,
+      "$editable": true,
+      "$orchestration": false,
+      "Contact_Name": {
+        "name": "James Venere (Sample)",
+        "id": "4816515000000307227"
+      },
+      "Sales_Cycle_Duration": 1,
+      "Type": "Existing Business",
+      "$in_merge": false,
+      "Lead_Source": null,
+      "Created_By": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "Tag": [],
+      "$approval_state": "approved"
+    },
+    {
+      "Owner": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "Description": null,
+      "$currency_symbol": "$",
+      "Campaign_Source": null,
+      "$review_process": {
+        "approve": false,
+        "reject": false,
+        "resubmit": false
+      },
+      "$followers": null,
+      "Closing_Date": "2021-03-08",
+      "Last_Activity_Time": null,
+      "Modified_By": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "$review": null,
+      "Lead_Conversion_Time": null,
+      "$state": "save",
+      "$process_flow": false,
+      "Deal_Name": "Chanay",
+      "Expected_Revenue": null,
+      "Overall_Sales_Duration": 2,
+      "Stage": "Needs Analysis",
+      "Account_Name": {
+        "name": "Chanay (Sample)",
+        "id": "4816515000000307130"
+      },
+      "id": "4816515000000307312",
+      "$approved": true,
+      "$approval": {
+        "delegate": false,
+        "approve": false,
+        "reject": false,
+        "resubmit": false
+      },
+      "Modified_Time": "2021-03-06T09:01:25-08:00",
+      "Created_Time": "2021-03-06T09:01:25-08:00",
+      "Amount": 55000,
+      "$followed": false,
+      "Probability": 20,
+      "Next_Step": null,
+      "$editable": true,
+      "$orchestration": false,
+      "Contact_Name": {
+        "name": "Josephine Darakjy (Sample)",
+        "id": "4816515000000307226"
+      },
+      "Sales_Cycle_Duration": 2,
+      "Type": "New Business",
+      "$in_merge": false,
+      "Lead_Source": null,
+      "Created_By": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "Tag": [],
+      "$approval_state": "approved"
+    },
+    {
+      "Owner": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "Description": null,
+      "$currency_symbol": "$",
+      "Campaign_Source": null,
+      "$review_process": {
+        "approve": false,
+        "reject": false,
+        "resubmit": false
+      },
+      "$followers": null,
+      "Closing_Date": "2021-03-07",
+      "Last_Activity_Time": "2021-03-06T09:01:27-08:00",
+      "Modified_By": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "$review": null,
+      "Lead_Conversion_Time": null,
+      "$state": "save",
+      "$process_flow": false,
+      "Deal_Name": "Benton",
+      "Expected_Revenue": null,
+      "Overall_Sales_Duration": 1,
+      "Stage": "Qualification",
+      "Account_Name": {
+        "name": "Benton (Sample)",
+        "id": "4816515000000307129"
+      },
+      "id": "4816515000000307311",
+      "$approved": true,
+      "$approval": {
+        "delegate": false,
+        "approve": false,
+        "reject": false,
+        "resubmit": false
+      },
+      "Modified_Time": "2021-03-06T09:01:25-08:00",
+      "Created_Time": "2021-03-06T09:01:25-08:00",
+      "Amount": 250000,
+      "$followed": false,
+      "Probability": 10,
+      "Next_Step": null,
+      "$editable": true,
+      "$orchestration": false,
+      "Contact_Name": {
+        "name": "John Butt (Sample)",
+        "id": "4816515000000307225"
+      },
+      "Sales_Cycle_Duration": 1,
+      "Type": "Existing Business",
+      "$in_merge": false,
+      "Lead_Source": null,
+      "Created_By": {
+        "name": "code",
+        "id": "4816515000000303001",
+        "email": "code@gabrielchan.ca"
+      },
+      "Tag": [],
+      "$approval_state": "approved"
+    }
+  ],
+  "info": {
+    "per_page": 200,
+    "count": 10,
+    "page": 1,
+    "more_records": false
+  }
+}

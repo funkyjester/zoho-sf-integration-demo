@@ -1,4 +1,4 @@
-package com.funkyjester.demo.zohosfintegration;
+package com.funkyjester.demo.integration;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

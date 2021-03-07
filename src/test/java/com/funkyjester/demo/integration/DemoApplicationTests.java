@@ -1,4 +1,4 @@
-package com.funkyjester.demo.zohosfintegration;
+package com.funkyjester.demo.integration;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
