@@ -2,16 +2,17 @@ package com.funkyjester.demo.integration.service;
 
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.funkyjester.demo.integration.model.zoho.PagedResponse;
-import com.funkyjester.demo.integration.model.zoho.Accounts;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.File;
 import java.nio.file.Files;
 import java.util.List;
 
 @Slf4j
+
+@SpringBootTest
 public class MarshallTest {
     @Test
     public void testMarshallAccount() throws Exception {
@@ -21,7 +22,6 @@ public class MarshallTest {
         String data = String.join(System.lineSeparator(), strings);
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
-        final PagedResponse pagedResponse = mapper.readValue(data, Accounts.class);
 
     }
 }

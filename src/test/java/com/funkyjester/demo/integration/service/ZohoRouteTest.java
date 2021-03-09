@@ -13,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.util.FileCopyUtils;
 
-import javax.ws.rs.client.SyncInvoker;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
@@ -27,16 +26,13 @@ public class ZohoRouteTest {
     @Autowired
     ApplicationContext applicationContext;
 
-    @Before
+    //@Before
     public void doInitMockForLocal() throws Exception {
         if (Arrays.stream(applicationContext.getEnvironment().getActiveProfiles()).anyMatch(x -> "local".equals(x))) {
             final InputStream resourceAsStream = ZohoRouteTest.class.getClassLoader().getResourceAsStream("samples/Zoho/Accounts_response.json");
             final String s = FileCopyUtils.copyToString(new InputStreamReader(resourceAsStream));
 
             ZohoAPIClientImpl mockSvc = Mockito.mock(ZohoAPIClientImpl.class, Mockito.withSettings().lenient());
-            Mockito.when(mockSvc)
-            SyncInvoker mockInvoker = Mockito.mock(SyncInvoker.class);
-            Mockito.when(mockInvoker.get(Mockito.any(Class.class))).thenReturn(s);
         }
     }
 

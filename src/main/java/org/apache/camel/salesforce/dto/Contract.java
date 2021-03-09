@@ -243,6 +243,18 @@ public class Contract extends AbstractDescribedSObjectBase {
         this.CompanySignedId = CompanySignedId;
     }
 
+     @XStreamAlias("CompanySigned")
+    private User CompanySigned;
+
+    @JsonProperty("CompanySigned")
+    public User getCompanySigned() {
+        return this.CompanySigned;
+    }
+
+    @JsonProperty("CompanySigned")
+    public void setCompanySigned(User CompanySigned) {
+        this.CompanySigned = CompanySigned;
+    }
     private java.time.LocalDate CompanySignedDate;
 
     @JsonProperty("CompanySignedDate")
@@ -327,6 +339,18 @@ public class Contract extends AbstractDescribedSObjectBase {
         this.ActivatedById = ActivatedById;
     }
 
+     @XStreamAlias("ActivatedBy")
+    private User ActivatedBy;
+
+    @JsonProperty("ActivatedBy")
+    public User getActivatedBy() {
+        return this.ActivatedBy;
+    }
+
+    @JsonProperty("ActivatedBy")
+    public void setActivatedBy(User ActivatedBy) {
+        this.ActivatedBy = ActivatedBy;
+    }
     private java.time.ZonedDateTime ActivatedDate;
 
     @JsonProperty("ActivatedDate")

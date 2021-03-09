@@ -206,6 +206,18 @@ public class Order extends AbstractDescribedSObjectBase {
         this.CompanyAuthorizedById = CompanyAuthorizedById;
     }
 
+     @XStreamAlias("CompanyAuthorizedBy")
+    private User CompanyAuthorizedBy;
+
+    @JsonProperty("CompanyAuthorizedBy")
+    public User getCompanyAuthorizedBy() {
+        return this.CompanyAuthorizedBy;
+    }
+
+    @JsonProperty("CompanyAuthorizedBy")
+    public void setCompanyAuthorizedBy(User CompanyAuthorizedBy) {
+        this.CompanyAuthorizedBy = CompanyAuthorizedBy;
+    }
     private java.time.LocalDate CompanyAuthorizedDate;
 
     @JsonProperty("CompanyAuthorizedDate")
@@ -531,6 +543,18 @@ public class Order extends AbstractDescribedSObjectBase {
         this.ActivatedById = ActivatedById;
     }
 
+     @XStreamAlias("ActivatedBy")
+    private User ActivatedBy;
+
+    @JsonProperty("ActivatedBy")
+    public User getActivatedBy() {
+        return this.ActivatedBy;
+    }
+
+    @JsonProperty("ActivatedBy")
+    public void setActivatedBy(User ActivatedBy) {
+        this.ActivatedBy = ActivatedBy;
+    }
     @XStreamConverter(PicklistEnumConverter.class)
     private Order_StatusCodeEnum StatusCode;
 

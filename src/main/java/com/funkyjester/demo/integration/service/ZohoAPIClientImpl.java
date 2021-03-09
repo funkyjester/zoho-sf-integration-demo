@@ -1,78 +1,167 @@
 package com.funkyjester.demo.integration.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.MapperFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.funkyjester.demo.integration.component.ZohoAPIAuthAgent;
-import com.funkyjester.demo.integration.model.zoho.Accounts;
-import com.funkyjester.demo.integration.model.zoho.PagedResponse;
-import com.google.j2objc.annotations.AutoreleasePool;
+import com.funkyjester.demo.integration.entity.ZohoWatermark;
+import com.funkyjester.demo.integration.entity.persistence.ZohoWatermarkRepository;
+import com.google.common.collect.Lists;
+import com.zoho.crm.api.HeaderMap;
+import com.zoho.crm.api.ParameterMap;
+import com.zoho.crm.api.exception.SDKException;
+import com.zoho.crm.api.record.Record;
+import com.zoho.crm.api.record.RecordOperations;
+import com.zoho.crm.api.record.ResponseHandler;
+import com.zoho.crm.api.record.ResponseWrapper;
+import com.zoho.crm.api.users.APIException;
+import com.zoho.crm.api.users.User;
+import com.zoho.crm.api.users.UsersOperations;
+import com.zoho.crm.api.util.APIResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
-import javax.ws.rs.NotAuthorizedException;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
+import java.time.OffsetDateTime;
+import java.util.List;
+import java.util.Optional;
 
 @Component("zohoAPIClient")
 @Slf4j
 public class ZohoAPIClientImpl implements ZohoAPIClient {
-    @Autowired
-    WebTarget zohoClient;
 
     @Autowired
-    ZohoAPIAuthAgent zohoAPIAuthAgent;
+    ZohoWatermarkRepository zohoWatermarkRepository;
 
-    ObjectMapper objectMapper;
 
-    private ObjectMapper getObjectMapper() {
-        if (objectMapper == null) {
-            objectMapper = new ObjectMapper();
-            objectMapper.configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES, true);
-        }
-        return objectMapper;
+
+    @Override
+    public List<Record> getDeals() {
+        return getRecords("Deals");
     }
 
     @Override
-    public Accounts getAccounts() {
-        try {
-            String response = tryGet("/Accounts");
-            log.info("Response: {}", response);
-            final Accounts accounts = getObjectMapper().readValue(response, Accounts.class);
-            return accounts;
-        } catch (JsonProcessingException jpe) {
-            log.error("Error processing", jpe);
-        } catch (Exception e) {
-            log.error("Unknown exception", e);
-        }
-        return new Accounts();
+    public List<Record> getUpdatedDeals() {
+        return getUpdatedRecords("Deals");
     }
 
-    private String tryGet(String path) throws Exception {
-        int retries = 1;
-        boolean retryableError = false;
-        do {
-            try {
-                String response = zohoClient
-                        .path(path)
-                        .request(MediaType.APPLICATION_JSON)
-                        //.header("Authentication", zohoAPIAuthAgent.getCurrentAuthHeader())
-                        .get(String.class);
-                return response;
-            } catch (NotAuthorizedException nre) {
-                try {
-                    zohoAPIAuthAgent.doRefreshAuth();
-                    retryableError = true;
-                } catch (Exception e) {
-                    log.error("Failed to refresh authentication", e);
+    @Override
+    public List<Record> getAccounts() {
+        return getRecords("Accounts");
+    }
+
+    @Override
+    public List<Record> getUpdatedAccounts() {
+        return getUpdatedRecords("Accounts");
+    }
+
+    @Override
+    public List<Record> getContacts() {
+        return getRecords("Contacts");
+    }
+    @Override
+    public List<Record> getUpdatedContacts() {
+        return getUpdatedRecords("Contacts");
+    }
+
+    @Override
+    public List<User> getUsers() {
+        return getUsers(null);
+    }
+
+    @Override
+    public List<User> getUpdatedUsers() {
+        String user_module = "User";
+        final Optional<ZohoWatermark> watermark = zohoWatermarkRepository.findById(user_module);
+        OffsetDateTime lastPoll = null;
+        OffsetDateTime now = OffsetDateTime.now();
+        if (watermark.isPresent()) {
+            lastPoll = watermark.get().getLastPoll();
+        }
+        List<User> users = null;
+        if (lastPoll != null) {
+            users = getUsers(lastPoll);
+        } else {
+            users = getUsers();
+        }
+        if (users.size() > 0) {
+            ZohoWatermark z = new ZohoWatermark();
+            z.setModule(user_module);
+            z.setLastPoll(now);
+            zohoWatermarkRepository.save(z);
+        }
+        return users;
+    }
+
+    private List<Record> getUpdatedRecords(String module) {
+        final Optional<ZohoWatermark> watermark = zohoWatermarkRepository.findById(module);
+        OffsetDateTime lastPoll = null;
+        OffsetDateTime now = OffsetDateTime.now();
+        if (watermark.isPresent()) {
+            lastPoll = watermark.get().getLastPoll();
+        }
+        List<Record> records = null;
+        if (lastPoll != null) {
+            records = getRecords(module, lastPoll);
+        } else {
+            records = getRecords(module);
+        }
+        if (records.size() > 0) {
+            ZohoWatermark z = new ZohoWatermark();
+            z.setModule(module);
+            z.setLastPoll(now);
+            zohoWatermarkRepository.save(z);
+        }
+        return records;
+    }
+
+    public List<User> getUsers(OffsetDateTime since) {
+        try {
+            final UsersOperations usersOperations = new UsersOperations();
+            HeaderMap h = new HeaderMap();
+            if (since != null) {
+                h.add(RecordOperations.GetRecordsHeader.IF_MODIFIED_SINCE, since);
+            }
+            final APIResponse<com.zoho.crm.api.users.ResponseHandler> users = usersOperations.getUsers(new ParameterMap(), h);
+            if (users.isExpected()) {
+                final com.zoho.crm.api.users.ResponseHandler responseHandler = users.getObject();
+                if (responseHandler instanceof com.zoho.crm.api.users.ResponseWrapper) {
+                    final com.zoho.crm.api.users.ResponseWrapper responseWrapper = (com.zoho.crm.api.users.ResponseWrapper) responseHandler;
+                    return responseWrapper.getUsers();
+                } else if (responseHandler instanceof APIException) {
+                    // TODO: log api exception
                 }
             }
-        } while (retryableError && retries-- > 0);
-        return null;
+        } catch (SDKException e) {
+            log.error("SDK Exception on users", e);
+        }
+        return Lists.newArrayList();
+    }
+
+    private List<Record> getRecords(String moduleAPI) {
+        return getRecords(moduleAPI, null);
+    }
+
+    private List<Record> getRecords(String moduleAPI, OffsetDateTime since) {
+        try {
+            final RecordOperations recordOperations = new RecordOperations();
+            ParameterMap parameterMap = new ParameterMap();
+            parameterMap.add(RecordOperations.GetRecordParam.APPROVED, "both");
+            HeaderMap h = new HeaderMap();
+            if (since != null) {
+                h.add(RecordOperations.GetRecordsHeader.IF_MODIFIED_SINCE, since);
+            }
+            APIResponse<ResponseHandler> response = recordOperations.getRecords(moduleAPI, parameterMap, h);
+            if (response != null) {
+                if (response.isExpected()) {
+                    final ResponseHandler responseHandler = response.getObject();
+                    if (responseHandler instanceof ResponseWrapper) {
+                        final ResponseWrapper responseWrapper = (ResponseWrapper) responseHandler;
+                        List<Record> records = responseWrapper.getData();
+                        return records;
+                    }
+                }
+            }
+        } catch (SDKException sdkException) {
+            log.error("SDK Exception on " + moduleAPI, sdkException);
+            // TODO: handle me
+        }
+        return Lists.newArrayList();
     }
 }

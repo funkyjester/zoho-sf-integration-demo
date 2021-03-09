@@ -169,6 +169,18 @@ public class ContentVersion extends AbstractDescribedSObjectBase {
         this.ContentModifiedById = ContentModifiedById;
     }
 
+     @XStreamAlias("ContentModifiedBy")
+    private User ContentModifiedBy;
+
+    @JsonProperty("ContentModifiedBy")
+    public User getContentModifiedBy() {
+        return this.ContentModifiedBy;
+    }
+
+    @JsonProperty("ContentModifiedBy")
+    public void setContentModifiedBy(User ContentModifiedBy) {
+        this.ContentModifiedBy = ContentModifiedBy;
+    }
     private Integer PositiveRatingCount;
 
     @JsonProperty("PositiveRatingCount")

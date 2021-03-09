@@ -49,6 +49,18 @@ public class UserProvisioningRequest extends AbstractDescribedSObjectBase {
         this.SalesforceUserId = SalesforceUserId;
     }
 
+     @XStreamAlias("SalesforceUser")
+    private User SalesforceUser;
+
+    @JsonProperty("SalesforceUser")
+    public User getSalesforceUser() {
+        return this.SalesforceUser;
+    }
+
+    @JsonProperty("SalesforceUser")
+    public void setSalesforceUser(User SalesforceUser) {
+        this.SalesforceUser = SalesforceUser;
+    }
     private String ExternalUserId;
 
     @JsonProperty("ExternalUserId")
@@ -172,6 +184,18 @@ public class UserProvisioningRequest extends AbstractDescribedSObjectBase {
         this.ManagerId = ManagerId;
     }
 
+     @XStreamAlias("Manager")
+    private User Manager;
+
+    @JsonProperty("Manager")
+    public User getManager() {
+        return this.Manager;
+    }
+
+    @JsonProperty("Manager")
+    public void setManager(User Manager) {
+        this.Manager = Manager;
+    }
  
     @Override
     public final SObjectDescription description() {

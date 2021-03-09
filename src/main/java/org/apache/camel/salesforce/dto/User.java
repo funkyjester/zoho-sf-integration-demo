@@ -570,6 +570,18 @@ public class User extends AbstractDescribedSObjectBase {
         this.ManagerId = ManagerId;
     }
 
+     @XStreamAlias("Manager")
+    private User Manager;
+
+    @JsonProperty("Manager")
+    public User getManager() {
+        return this.Manager;
+    }
+
+    @JsonProperty("Manager")
+    public void setManager(User Manager) {
+        this.Manager = Manager;
+    }
     private java.time.ZonedDateTime LastLoginDate;
 
     @JsonProperty("LastLoginDate")
@@ -1628,6 +1640,18 @@ public class User extends AbstractDescribedSObjectBase {
         this.JigsawImportLimitOverride = JigsawImportLimitOverride;
     }
 
+    private String zohoId__c;
+
+    @JsonProperty("zohoId__c")
+    public String getzohoId__c() {
+        return this.zohoId__c;
+    }
+
+    @JsonProperty("zohoId__c")
+    public void setzohoId__c(String zohoId__c) {
+        this.zohoId__c = zohoId__c;
+    }
+
      private QueryRecordsContract ContractsSigned;
 
     @JsonProperty("ContractsSigned")
@@ -1953,6 +1977,8 @@ public class User extends AbstractDescribedSObjectBase {
         fields1.add(sObjectField138);
         final SObjectField sObjectField139 = createField("LastReferencedDate", "Last Referenced Date", "datetime", "xsd:dateTime", 0, false, true, false, false, false, false, false);
         fields1.add(sObjectField139);
+        final SObjectField sObjectField140 = createField("zohoId__c", "zohoId", "string", "xsd:string", 32, false, true, false, true, true, false, true);
+        fields1.add(sObjectField140);
 
         description.setLabel("User");
         description.setLabelPlural("Users");

@@ -14,14 +14,15 @@ import java.util.Map;
 @Configuration
 @ConfigurationProperties(prefix = "zoho.api")
 @Getter @Setter
-@ToString
 @Slf4j
-public class ZohoPropertyConfig {
+public class ZohoContext {
     Map<String, String> auth = Maps.newHashMap();
     String url;
     String authprefix;
     String rootpath;
-
+    String loglevel;
+    String logpath;
+    String resourcepath;
     //@PostConstruct
     public void doPostConstruct() {
         log.info("this: {}", this.toString());
