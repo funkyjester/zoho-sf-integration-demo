@@ -14,7 +14,7 @@ import java.time.OffsetDateTime;
 @Getter @Setter
 public class SFAuditEntry {
     @Id
-    OffsetDateTime id;
+    String time;
 
     String salesforceId;
 

@@ -47,7 +47,7 @@ public class ServiceController {
         if (Strings.isNotEmpty(module)) {
             if (ok_modules.contains(module)) {
                 String ep = ep_template.replaceAll("__MODULE__", module);
-                camelContext.createProducerTemplate().sendBody(ep, Boolean.TRUE);
+                camelContext.createProducerTemplate().sendBody(ep, null);
                 return "OK";
             }
         }

@@ -36,11 +36,4 @@ public class ZohoRouteTest {
         }
     }
 
-    @Test
-    public void test() {
-        final FluentProducerTemplate pt = camelContext.createFluentProducerTemplate();
-        final Object response = pt.to("direct:foo").request();
-        Assert.assertNotNull(response);
-        log.info("response: {}", response);
-    }
 }

@@ -77,7 +77,7 @@ public class SalesforceClientImpl implements SalesforceClient {
     private void auditLog(CreateSObjectResult obj) {
         if (obj != null) {
             SFAuditEntry entry = new SFAuditEntry();
-            entry.setId(OffsetDateTime.now());
+            entry.setTime(OffsetDateTime.now().toString());
             entry.setSalesforceId(obj.getId());
             entry.setSuccess(obj.getSuccess());
             if (!obj.getSuccess() && obj.getErrors() != null && obj.getErrors().size() > 0) {
@@ -126,13 +126,13 @@ public class SalesforceClientImpl implements SalesforceClient {
             log.warn("no external id field found for {}", clazz.getSimpleName());
             return Optional.empty();
         }
+        Map<String, Object> headers = new HashMap<>();
         try {
             Object o = clazz.newInstance();
             if (!(o instanceof AbstractDescribedSObjectBase)) {
                 return Optional.empty();
             }
             ProducerTemplate pt = camelContext.createProducerTemplate();
-            Map<String, Object> headers = new HashMap<>();
             headers.put(FORMAT, salesforceContext.getSalesforceResponseFormat());
             headers.put(SOBJECT_FIELDS,
                     String.join(",", (((AbstractDescribedSObjectBase)o).description().getFields().stream().map(SObjectField::getName).collect(Collectors.toList()))));

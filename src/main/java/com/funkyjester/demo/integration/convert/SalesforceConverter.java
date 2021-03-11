@@ -121,6 +121,7 @@ public class SalesforceConverter implements TypeConverters {
                     c.setLastModifiedById(null);
                 }
             }
+            c.setPhone(src.getPhone());
             c.setLastActivityDate(src.getLastActivityTime().toZonedDateTime());
             c.setBirthdate(src.getDob());
             c.setDepartment(src.getDepartment());
@@ -159,15 +160,17 @@ public class SalesforceConverter implements TypeConverters {
                     c.setReportsToId(null);
                 }
             }
-            try {
-                String salutation = src.getSalutation();
-                if (Strings.isNotEmpty(salutation) && !salutation.endsWith(".")) {
-                    salutation += ".";
+            String salutation = src.getSalutation();
+                if (Strings.isNotEmpty(salutation)) {
+                    if (!salutation.endsWith(".")) {
+                        salutation += ".";
+                    }
+                    try {
+                        c.setSalutation(Contact_SalutationEnum.fromValue(salutation)); // probably better with datamap
+                    } catch (Exception e) {
+                        log.warn("Failed to match salutation ({}) for {}", salutation, c.getzohoId__c());
+                    }
                 }
-                c.setSalutation(Contact_SalutationEnum.fromValue(salutation)); // probably better with datamap
-            } catch (Exception e) {
-                log.warn("Failed to match salutation for {}", c.getzohoId__c());
-            }
             c.setTitle(src.getTitle());
         }
         return c;

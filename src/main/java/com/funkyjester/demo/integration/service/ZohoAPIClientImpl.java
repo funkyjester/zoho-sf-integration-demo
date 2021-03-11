@@ -87,6 +87,9 @@ public class ZohoAPIClientImpl implements ZohoAPIClient {
             ZohoWatermark z = new ZohoWatermark();
             z.setModule(RES_USERS);
             z.setLastPoll(now);
+            if (lastPoll != null) {
+                z.setPreviousValue(lastPoll);
+            }
             zohoWatermarkRepository.save(z);
         }
         return users;
@@ -109,6 +112,9 @@ public class ZohoAPIClientImpl implements ZohoAPIClient {
             ZohoWatermark z = new ZohoWatermark();
             z.setModule(module);
             z.setLastPoll(now);
+            if (lastPoll != null) {
+                z.setPreviousValue(lastPoll);
+            }
             zohoWatermarkRepository.save(z);
         }
         return records;

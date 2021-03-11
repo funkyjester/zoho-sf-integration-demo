@@ -4,6 +4,7 @@ import com.funkyjester.demo.integration.model.Action;
 import com.funkyjester.demo.integration.model.SOR;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.salesforce.dto.Account;
+import org.apache.camel.salesforce.dto.User;
 import org.apache.logging.log4j.util.Strings;
 import org.junit.Assert;
 import org.junit.Assume;
@@ -13,7 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Optional;
 
-@SpringBootTest
+@SpringBootTest(properties = { "spring.quartz.auto-startup=false" })
 @Slf4j
 public class SalesforceServiceTest {
     @Autowired
@@ -35,6 +36,20 @@ public class SalesforceServiceTest {
         Assert.assertTrue(sf_query_opt.isPresent());
         Assert.assertTrue(account.getId().equals(sf_query_opt.get().getId()));
         Assert.assertTrue(account.getzohoId__c().equals(sf_query_opt.get().getzohoId__c()));
+    }
+
+    @Test
+    public void testQueryUser() throws Exception {
+        String zId = "4816515000000303001";
+        Optional<User> user_opt;
+        int counter = 1;
+        log.info("Run {}", counter++);
+        user_opt = salesforceClient.queryByAnyId(User.class, null, zId);
+        Thread.sleep(5000l);
+        log.info("Run {}", counter++);
+        user_opt = salesforceClient.queryByAnyId(User.class, null, zId);
+        Assert.assertNotNull(user_opt);
+        log.info("user: {}", user_opt.get());
     }
 
     @Test
