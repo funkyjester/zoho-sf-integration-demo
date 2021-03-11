@@ -1,6 +1,8 @@
 package com.funkyjester.demo.integration.service;
 
 import com.funkyjester.demo.integration.config.SalesforceContext;
+import com.funkyjester.demo.integration.entity.SFAuditEntry;
+import com.funkyjester.demo.integration.entity.persistence.SFAuditRepository;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import lombok.AllArgsConstructor;
@@ -9,19 +11,29 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.*;
 import org.apache.camel.component.salesforce.api.dto.AbstractDescribedSObjectBase;
 import org.apache.camel.component.salesforce.api.dto.CreateSObjectResult;
+import org.apache.camel.component.salesforce.api.dto.RestError;
 import org.apache.camel.component.salesforce.api.dto.SObjectField;
 import org.apache.camel.component.salesforce.api.utils.QueryHelper;
+import org.apache.camel.salesforce.dto.Account;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.apache.camel.component.salesforce.SalesforceEndpointConfig.*;
+import static org.apache.camel.salesforce.dto.DandBCompany_GeoCodeAccuracyEnum.T;
 
+/**
+ * service representation of salesforce api
+ * Allows upserts and queries
+ * Not implemented: deletes
+ */
 @Component("salesforceClient")
 @Slf4j
 public class SalesforceClientImpl implements SalesforceClient {
@@ -52,14 +64,34 @@ public class SalesforceClientImpl implements SalesforceClient {
                 // ignore. use salesforce Id
                 //log.info("{} not found on {}", ZOHO_ID_C, record.getClass().getSimpleName());
             }
-            return pt.requestBodyAndHeaders("salesforce:upsertSObject", record, headers, CreateSObjectResult.class);
+            CreateSObjectResult createSObjectResult = pt.requestBodyAndHeaders("salesforce:upsertSObject", record, headers, CreateSObjectResult.class);
+            auditLog(createSObjectResult);
+            return createSObjectResult;
         }
         return null;
     }
 
+    @Autowired
+    SFAuditRepository auditRepository;
+
+    private void auditLog(CreateSObjectResult obj) {
+        if (obj != null) {
+            SFAuditEntry entry = new SFAuditEntry();
+            entry.setId(OffsetDateTime.now());
+            entry.setSalesforceId(obj.getId());
+            entry.setSuccess(obj.getSuccess());
+            if (!obj.getSuccess() && obj.getErrors() != null && obj.getErrors().size() > 0) {
+                RestError restError = obj.getErrors().get(0);
+                entry.setMessage(restError.getMessage());
+                entry.setErrorCode(restError.getErrorCode());
+            }
+            auditRepository.save(entry);
+        }
+    }
+
     @Override
     public <T> Optional<T> queryBySalesforceId(Class<T> clazz, String salesforceId) {
-        if (clazz == null || salesforceId == null) {
+        if (clazz == null || salesforceId == null || Strings.isEmpty(salesforceId)) {
             return Optional.empty();
         }
         try {
@@ -70,17 +102,21 @@ public class SalesforceClientImpl implements SalesforceClient {
             ProducerTemplate pt = camelContext.createProducerTemplate();
             Map<String, Object> headers = new HashMap<>();
             headers.put(FORMAT, salesforceContext.getSalesforceResponseFormat());
-            headers.put(SOBJECT_FIELDS, QueryHelper.queryToFetchFilteredFieldsOf((AbstractDescribedSObjectBase)o, SObjectField::isCustom));
+            headers.put(SOBJECT_FIELDS,
+                    String.join(",", (((AbstractDescribedSObjectBase)o).description().getFields().stream().map(SObjectField::getName).collect(Collectors.toList()))));
+            //headers.put(SOBJECT_FIELDS, QueryHelper.queryToFetchFilteredFieldsOf((AbstractDescribedSObjectBase)o, SObjectField::isCustom));
             headers.put(SOBJECT_NAME, clazz.getSimpleName());
             headers.put(SOBJECT_CLASS, clazz.getName());
             return Optional.ofNullable(pt.requestBodyAndHeaders("salesforce:getSObject", salesforceId, headers, clazz));
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            log.error("exception", e);
+        }
         return Optional.empty();
     }
 
     @Override
     public <T> Optional<T> queryByZohoId(Class<T> clazz, String zohoId) {
-        if (clazz == null || zohoId == null) {
+        if (clazz == null || zohoId == null || Strings.isEmpty(zohoId)) {
             return Optional.empty();
         }
         try {
@@ -98,12 +134,16 @@ public class SalesforceClientImpl implements SalesforceClient {
             ProducerTemplate pt = camelContext.createProducerTemplate();
             Map<String, Object> headers = new HashMap<>();
             headers.put(FORMAT, salesforceContext.getSalesforceResponseFormat());
-            headers.put(SOBJECT_FIELDS, QueryHelper.queryToFetchFilteredFieldsOf((AbstractDescribedSObjectBase)o, SObjectField::isCustom));
+            headers.put(SOBJECT_FIELDS,
+                    String.join(",", (((AbstractDescribedSObjectBase)o).description().getFields().stream().map(SObjectField::getName).collect(Collectors.toList()))));
+            //headers.put(SOBJECT_FIELDS, QueryHelper.queryToFetchFilteredFieldsOf((AbstractDescribedSObjectBase)o, SObjectField::isCustom));
             headers.put(SOBJECT_NAME, clazz.getSimpleName());
             headers.put(SOBJECT_CLASS, clazz.getName());
             headers.put(SOBJECT_EXT_ID_NAME, ZOHO_ID_C);
             return Optional.ofNullable(pt.requestBodyAndHeaders("salesforce:getSObjectWithId", zohoId, headers, clazz));
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            log.error("exception", e);
+        }
         return Optional.empty();
     }
 

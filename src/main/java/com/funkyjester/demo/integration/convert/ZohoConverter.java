@@ -7,16 +7,23 @@ import com.funkyjester.demo.integration.model.common.Contact;
 import com.funkyjester.demo.integration.model.common.User;
 import com.zoho.crm.api.record.Record;
 import com.zoho.crm.api.util.Choice;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.Converter;
 import org.apache.camel.TypeConverters;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * converters between master data and zoho model
+ */
 @Component
+@Slf4j
 public class ZohoConverter implements TypeConverters {
     public static final String ACCOUNT_IDENTIFIER_KEY = "Account_Number";
     public static final String CONTACT_IDENTIFIER_KEY = "Lead_Source";
@@ -90,10 +97,10 @@ public class ZohoConverter implements TypeConverters {
             c.setAccountName(convertToAccount((Record) r.getKeyValue("Account_Name")));
             c.setAssistant((String)r.getKeyValue("Assistant"));
             c.setAsstPhone((String)r.getKeyValue("Asst_Phone"));
-            c.setDob((LocalDate) r.getKeyValue("Date_of_Birth"));
+            c.setDob((LocalDate)(r.getKeyValue("Date_of_Birth")));
             c.setDepartment((String)r.getKeyValue("Department"));
             c.setEmail((String)r.getKeyValue("Email"));
-            c.setEmailOptOut(Boolean.parseBoolean((String)r.getKeyValue("Email_Opt_Out")));
+            c.setEmailOptOut((Boolean)r.getKeyValue("Email_Opt_Out"));
             c.setSecondaryEmail((String)r.getKeyValue("Secondary_Email"));
             c.setFax((String)r.getKeyValue("Fax"));
             c.setFirstName((String)r.getKeyValue("First_Name"));
@@ -121,8 +128,11 @@ public class ZohoConverter implements TypeConverters {
             c.setOwner(convertToUser((com.zoho.crm.api.users.User)r.getKeyValue("Owner")));
             c.setLastActivityTime((OffsetDateTime) r.getKeyValue("Last_Activity_Time"));
             c.setDescription((String)r.getKeyValue("Description"));
-            c.setLeadSource(getChoiceValue((String)r.getKeyValue("Lead_Source")));
-            c.setReportingTo((Contact)r.getKeyValue("Reporting_To"));
+            c.setLeadSource(getChoiceValue(r.getKeyValue("Lead_Source")));
+            Object reporting_to = r.getKeyValue("Reporting_To");
+            if (reporting_to != null && reporting_to instanceof Record) {
+                c.setReportingToId(Long.toString(((Record)reporting_to).getId()));
+            }
             return c;
         }
         return null;

@@ -21,6 +21,9 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 
+/**
+ *  property file properties mapped to variables
+ */
 @Configuration
 @Slf4j
 public class ZohoComponentConfig {

@@ -19,6 +19,9 @@ import org.springframework.context.annotation.Profile;
 import javax.annotation.PostConstruct;
 import javax.jms.ConnectionFactory;
 
+/**
+ * initialize components specific to local profile
+ */
 @Configuration
 @Getter @Setter
 @Profile("local")
@@ -36,6 +39,10 @@ public class AppLocalConfig {
 
     /********************** JMS **********************/
 
+    /**
+     * JMS camel endpoint component, initialized with JMS connection credentials
+     * @return
+     */
     @Bean
     public JmsComponent jms() {
         JmsComponent jmsComponent = new JmsComponent();

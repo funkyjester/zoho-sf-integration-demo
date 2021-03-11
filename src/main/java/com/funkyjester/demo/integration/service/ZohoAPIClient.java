@@ -11,6 +11,11 @@ import java.util.List;
 //@Path("${zoho.api.rootpath}")
 //@Produces(MediaType.APPLICATION_JSON)
 public interface ZohoAPIClient {
+    public static final String RES_USERS = "Users";
+    public static final String RES_ACCOUNTS = "Accounts";
+    public static final String RES_CONTACTS = "Contacts";
+    public static final String RES_DEALS = "Deals";
+
 
     //@GET
     //@Path(value = "/Accounts")

@@ -11,6 +11,9 @@ import org.springframework.context.annotation.Configuration;
 import javax.annotation.PostConstruct;
 import java.util.Map;
 
+/**
+ * authentication properties for zoho
+ */
 @Configuration
 @ConfigurationProperties(prefix = "zoho.api")
 @Getter @Setter

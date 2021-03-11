@@ -79,10 +79,4 @@ public class ZohoServiceTest {
         }
     }
 
-    @Test
-    public void testCamelServiceCall() throws Exception {
-        FluentProducerTemplate pt = camelContext.createFluentProducerTemplate();
-        String output = pt.to("cxfrs:bean:zohoClient:getAccounts").request(String.class);
-    }
-
 }

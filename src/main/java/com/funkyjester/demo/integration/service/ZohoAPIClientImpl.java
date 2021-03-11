@@ -22,6 +22,10 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * service implementations for zohoCRM
+ *
+ */
 @Component("zohoAPIClient")
 @Slf4j
 public class ZohoAPIClientImpl implements ZohoAPIClient {
@@ -33,31 +37,31 @@ public class ZohoAPIClientImpl implements ZohoAPIClient {
 
     @Override
     public List<Record> getDeals() {
-        return getRecords("Deals");
+        return getRecords(RES_DEALS);
     }
 
     @Override
     public List<Record> getUpdatedDeals() {
-        return getUpdatedRecords("Deals");
+        return getUpdatedRecords(RES_DEALS);
     }
 
     @Override
     public List<Record> getAccounts() {
-        return getRecords("Accounts");
+        return getRecords(RES_ACCOUNTS);
     }
 
     @Override
     public List<Record> getUpdatedAccounts() {
-        return getUpdatedRecords("Accounts");
+        return getUpdatedRecords(RES_ACCOUNTS);
     }
 
     @Override
     public List<Record> getContacts() {
-        return getRecords("Contacts");
+        return getRecords(RES_CONTACTS);
     }
     @Override
     public List<Record> getUpdatedContacts() {
-        return getUpdatedRecords("Contacts");
+        return getUpdatedRecords(RES_CONTACTS);
     }
 
     @Override
@@ -67,8 +71,7 @@ public class ZohoAPIClientImpl implements ZohoAPIClient {
 
     @Override
     public List<User> getUpdatedUsers() {
-        String user_module = "User";
-        final Optional<ZohoWatermark> watermark = zohoWatermarkRepository.findById(user_module);
+        final Optional<ZohoWatermark> watermark = zohoWatermarkRepository.findById(RES_USERS);
         OffsetDateTime lastPoll = null;
         OffsetDateTime now = OffsetDateTime.now();
         if (watermark.isPresent()) {
@@ -82,7 +85,7 @@ public class ZohoAPIClientImpl implements ZohoAPIClient {
         }
         if (users.size() > 0) {
             ZohoWatermark z = new ZohoWatermark();
-            z.setModule(user_module);
+            z.setModule(RES_USERS);
             z.setLastPoll(now);
             zohoWatermarkRepository.save(z);
         }
@@ -116,6 +119,7 @@ public class ZohoAPIClientImpl implements ZohoAPIClient {
             final UsersOperations usersOperations = new UsersOperations();
             HeaderMap h = new HeaderMap();
             if (since != null) {
+                log.info("Query modified {} since {}", RES_USERS.toLowerCase(), since.toString());
                 h.add(RecordOperations.GetRecordsHeader.IF_MODIFIED_SINCE, since);
             }
             final APIResponse<com.zoho.crm.api.users.ResponseHandler> users = usersOperations.getUsers(new ParameterMap(), h);
@@ -145,6 +149,7 @@ public class ZohoAPIClientImpl implements ZohoAPIClient {
             parameterMap.add(RecordOperations.GetRecordParam.APPROVED, "both");
             HeaderMap h = new HeaderMap();
             if (since != null) {
+                log.info("Query modified {} since {}", moduleAPI.toLowerCase(), since.toString());
                 h.add(RecordOperations.GetRecordsHeader.IF_MODIFIED_SINCE, since);
             }
             APIResponse<ResponseHandler> response = recordOperations.getRecords(moduleAPI, parameterMap, h);

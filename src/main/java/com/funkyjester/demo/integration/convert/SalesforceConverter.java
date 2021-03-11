@@ -14,11 +14,15 @@ import org.apache.camel.salesforce.dto.Contact;
 import org.apache.camel.salesforce.dto.Contact_SalutationEnum;
 import org.apache.camel.salesforce.dto.User;
 import org.apache.camel.spi.TypeConverterRegistry;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
+/**
+ * type converters between master data model and salesforce
+ */
 @Slf4j
 @Component
 public class SalesforceConverter implements TypeConverters {
@@ -125,7 +129,7 @@ public class SalesforceConverter implements TypeConverters {
             c.setFax(src.getFax());
             c.setFirstName(src.getFirstName());
             c.setLastName(src.getLastName());
-            c.setName(src.getFullName());
+            //c.setName(src.getFullName());
             c.setHomePhone(src.getHomePhone());
             c.setLeadSource(Contact_LeadSrc.match(src.getLeadSource()));
             c.setMailingCity(src.getMailingCity());
@@ -147,16 +151,23 @@ public class SalesforceConverter implements TypeConverters {
                     c.setOwnerId(null);
                 }
             }
-            if (src.getReportingTo() != null) {
-                Contact l = salesforceClient.cachedLookup(Contact.class, src.getReportingTo().getSalesforceId(), src.getReportingTo().getZohoId());
+            if (src.getReportingToId() != null) {
+                Contact l = salesforceClient.cachedLookup(Contact.class, null, src.getReportingToId());
                 if (l != null) {
                     c.setReportsToId(l.getId());
                 } else {
                     c.setReportsToId(null);
                 }
             }
-            //c.setReportsTo(src.getReportsTo);
-            c.setSalutation(Contact_SalutationEnum.fromValue(src.getSalutation())); // probably better with datamap
+            try {
+                String salutation = src.getSalutation();
+                if (Strings.isNotEmpty(salutation) && !salutation.endsWith(".")) {
+                    salutation += ".";
+                }
+                c.setSalutation(Contact_SalutationEnum.fromValue(salutation)); // probably better with datamap
+            } catch (Exception e) {
+                log.warn("Failed to match salutation for {}", c.getzohoId__c());
+            }
             c.setTitle(src.getTitle());
         }
         return c;
@@ -192,7 +203,7 @@ public class SalesforceConverter implements TypeConverters {
             u.setEmail(src.getEmail());
             u.setFirstName(src.getFirstName());
             u.setLastName(src.getLastName());
-            u.setName(src.getFullName());
+            //u.setName(src.getFullName());
         }
         return u;
     }

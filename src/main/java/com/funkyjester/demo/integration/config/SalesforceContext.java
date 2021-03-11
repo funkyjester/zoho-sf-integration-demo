@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.annotation.PostConstruct;
 
 /**
+ * property file properties mapped to variables
  * Author:  gabe
  * Date:    2020-05-05
  * Project: salesforce-prototype

@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.OffsetDateTimeSerializer;
+import com.funkyjester.demo.integration.convert.SimpleLocalDateDeSerializer;
+import com.funkyjester.demo.integration.convert.SimpleLocalDateSerializer;
 import com.funkyjester.demo.integration.convert.SimpleOffsetDateTimeDeSerializer;
 import com.funkyjester.demo.integration.convert.SimpleOffsetDateTimeSerializer;
 import lombok.Getter;
@@ -25,6 +27,8 @@ public class Contact extends Record {
     @JsonProperty
     String asstPhone;
     @JsonProperty
+    @JsonSerialize(converter = SimpleLocalDateSerializer.class)
+    @JsonDeserialize(converter = SimpleLocalDateDeSerializer.class)
     LocalDate dob;
     @JsonProperty
     String department;
@@ -38,7 +42,7 @@ public class Contact extends Record {
     String fax;
 
     @JsonProperty
-    Contact reportingTo;
+    String reportingToId;
 
     @JsonProperty
     String firstName;

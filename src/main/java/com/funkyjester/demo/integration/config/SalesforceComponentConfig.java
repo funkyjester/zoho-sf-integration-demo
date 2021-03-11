@@ -29,6 +29,9 @@ public class SalesforceComponentConfig {
         return loginConfig;
     }
 
+    /**
+     * salesforce camel endpoint configuration
+     */
     @Bean("salesforce")
     SalesforceComponent salesforceComponent(SalesforceLoginConfig loginConfig) throws Exception {
         SalesforceComponent component = new SalesforceComponent();
